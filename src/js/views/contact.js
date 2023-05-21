@@ -35,6 +35,13 @@ const ContactList = () => {
 
 
 
+  const deleteContact = (id) => {
+    const newContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(newContacts);
+  };
+
+
+
   const getContact = async () => {
 		try{
 			let response = await fetch(`${URLBASE}`)
@@ -77,6 +84,7 @@ const ContactList = () => {
             <p>{contact.email}</p>
             <p>{contact.phone}</p>
             <p>{contact.address}</p>
+            <button onClick={() => deleteContact(contact.id)}>Delete</button>
           </li>
         ))}
       </ul>
