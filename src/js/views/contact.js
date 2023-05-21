@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+
+const URLBASE = 'https://assets.breatheco.de/apis/fake/contact/agenda/victorpantin'
 
 const ContactList = () => {
-  const [contacts, setContacts] = useState([
-    {
-      full_name: "John Doe",
-      email: "johndoe@example.com",
-      phone: "123-456-7890",
-      address: "turmero"
-    }
-  ]);
+  const [contacts, setContacts] = useState([]);
 
   const [newContact, setNewContact] = useState({
     full_name: "",
@@ -36,6 +32,40 @@ const ContactList = () => {
       address: "",
     });
   };
+
+
+
+  const getContact = async () => {
+		try{
+			let response = await fetch(`${URLBASE}`)
+			let data = await response.json()
+
+			if(response.status == 404){
+				console.log("error")
+				
+			}else{
+				setContacts(data)
+			}
+
+
+
+		}catch(err){
+			console.log(err)
+		}
+
+	}
+
+
+
+  useEffect(() => {
+		getContact()
+	}, [])
+
+
+
+
+
+  
 
   return (
     <div>
