@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const ContactList = () => {
   const [contacts, setContacts] = useState([
     {
-      name: "John Doe",
+      full_name: "John Doe",
       email: "johndoe@example.com",
       phone: "123-456-7890",
       address: "turmero"
@@ -11,7 +11,7 @@ const ContactList = () => {
   ]);
 
   const [newContact, setNewContact] = useState({
-    name: "",
+    full_name: "",
     email: "",
     phone: "",
     address: "",
@@ -30,7 +30,7 @@ const ContactList = () => {
 
     setContacts([...contacts, newContact]);
     setNewContact({
-      name: "",
+      full_name: "",
       email: "",
       phone: "",
       address: "",
@@ -43,7 +43,7 @@ const ContactList = () => {
       <ul>
         {contacts.map((contact) => (
           <li key={contact.id}>
-            <strong>{contact.name}</strong>
+            <strong>{contact.full_name}</strong>
             <p>{contact.email}</p>
             <p>{contact.phone}</p>
             <p>{contact.address}</p>
@@ -54,9 +54,9 @@ const ContactList = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
-          placeholder="Name"
-          value={newContact.name}
+          name="full_name"
+          placeholder="name"
+          value={newContact.full_name}
           onChange={handleChange}
         />
         <input
@@ -77,7 +77,7 @@ const ContactList = () => {
           type="text"
           name="address"
           placeholder="Address"
-          value={newContact.address.street}
+          value={newContact.address}
           onChange={handleChange}
         />
         
