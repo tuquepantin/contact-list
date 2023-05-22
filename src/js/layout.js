@@ -23,9 +23,9 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Routes>
-						<Route path="/" element={<Home />} />
+						<Route path="/home" element={<Home />} />
 						<Route path="/demo" element={<Demo />} />
-						<Route path="/contact" element={<ContactList />} />
+						<Route path="/" element={<ContactList />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
