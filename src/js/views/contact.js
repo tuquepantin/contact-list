@@ -6,13 +6,14 @@ import { Context } from "../store/appContext";
 
 
 const ContactList = () => {
-  const [contacts, setContacts] = useState([]);
+  // const [contacts, setContacts] = useState([]);
 
   const [newContact, setNewContact] = useState({
     full_name: "",
-    email: "",
-    phone: "",
-    address: "",
+        email: "",
+        agenda_slug: "victorpantin",
+        address:"",
+        phone:""
     
   });
 ///// Context/////
@@ -28,20 +29,15 @@ const ContactList = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setContacts([...contacts, newContact]);
-    setNewContact({
-      full_name: "",
-      email: "",
-      phone: "",
-      address: "",
-    });
+    actions.createContact(newContact)
+
+    
   };
 
 
 
   const deleteContact = (id) => {
-    const newContacts = contacts.filter((contact) => contact.id !== id);
-    setContacts(newContacts);
+    actions.deleteContact(id)
   };
 
 
@@ -68,9 +64,7 @@ const ContactList = () => {
 
 
 
-  useEffect(() => {
-		actions.getContact()
-	}, [])
+  
 
 
 
