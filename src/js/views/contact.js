@@ -1,21 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
-
-
-
-
 const ContactList = () => {
-  // const [contacts, setContacts] = useState([]);
-
+  
   const [newContact, setNewContact] = useState({
     full_name: "",
         email: "",
         agenda_slug: "victorpantin",
         address:"",
         phone:""
-    
   });
+
 ///// Context/////
   const { store, actions} = useContext(Context)
 
@@ -28,49 +23,12 @@ const ContactList = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     actions.createContact(newContact)
-
-    
   };
-
-
 
   const deleteContact = (id) => {
     actions.deleteContact(id)
   };
-
-
-
-  // const getContact = async () => {
-	// 	try{
-	// 		let response = await fetch(`${URLBASE}`)
-	// 		let data = await response.json()
-
-	// 		if(response.status == 404){
-	// 			console.log("error")
-				
-	// 		}else{
-	// 			setContacts(data)
-	// 		}
-
-
-
-	// 	}catch(err){
-	// 		console.log(err)
-	// 	}
-
-	// }
-
-
-
-  
-
-
-
-
-
-  
 
   return (
     <div>
