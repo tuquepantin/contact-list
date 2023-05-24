@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			URLBASE: 'https://assets.breatheco.de/apis/fake/contact/agenda/victorpantin',
+			contacts: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -15,6 +17,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			getContact: async () => {
+				const store = getStore()
+				try{
+					let response = await fetch(`${store.URLBASE}`)
+					let data = await response.json()
+		
+					if(response.status == 404){
+						console.log("error")
+						
+					}else{
+						setStore({
+							contacts: data
+						})
+					}
+		
+		
+		
+				}catch(err){
+					console.log(err)
+				}
+		
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

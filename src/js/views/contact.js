@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 
 
-const URLBASE = 'https://assets.breatheco.de/apis/fake/contact/agenda/victorpantin'
+
+
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -13,6 +15,8 @@ const ContactList = () => {
     address: "",
     
   });
+///// Context/////
+  const { store, actions} = useContext(Context)
 
   const handleChange = (event) => {
     setNewContact({
@@ -42,30 +46,30 @@ const ContactList = () => {
 
 
 
-  const getContact = async () => {
-		try{
-			let response = await fetch(`${URLBASE}`)
-			let data = await response.json()
+  // const getContact = async () => {
+	// 	try{
+	// 		let response = await fetch(`${URLBASE}`)
+	// 		let data = await response.json()
 
-			if(response.status == 404){
-				console.log("error")
+	// 		if(response.status == 404){
+	// 			console.log("error")
 				
-			}else{
-				setContacts(data)
-			}
+	// 		}else{
+	// 			setContacts(data)
+	// 		}
 
 
 
-		}catch(err){
-			console.log(err)
-		}
+	// 	}catch(err){
+	// 		console.log(err)
+	// 	}
 
-	}
+	// }
 
 
 
   useEffect(() => {
-		getContact()
+		actions.getContact()
 	}, [])
 
 
@@ -78,7 +82,7 @@ const ContactList = () => {
     <div>
       <h1>Contact List</h1>
       <ul>
-        {contacts.map((contact) => (
+        {store.contacts.map((contact) => (
           <li key={contact.id}>
             <strong>{contact.full_name}</strong>
             <p>{contact.email}</p>
