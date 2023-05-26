@@ -23,13 +23,13 @@ export const Contact = () => {
                       alt="Contact"
                     />
             </div>
-            <div className="col-8">
-              <strong>{contact.full_name}</strong>
+            <div className="col-9 p-4">
+              <h3>{contact.full_name}</h3>
               <p>{contact.email}</p>
               <p>{contact.phone}</p>
               <p>{contact.address}</p>
             </div>
-            <div className="col-2">
+            <div className="col-1">
               <button onClick={() => deleteContact(contact.id)}>Delete</button></div>
             
             </div>
