@@ -14,13 +14,27 @@ export const Contact = () => {
       <h1>Contact List</h1>
       <ul>
         {store.contacts.map((contact) => (
-          <li key={contact.id}>
-            <strong>{contact.full_name}</strong>
-            <p>{contact.email}</p>
-            <p>{contact.phone}</p>
-            <p>{contact.address}</p>
-            <button onClick={() => deleteContact(contact.id)}>Delete</button>
-          </li>
+          <div class="card" key={contact.id}>
+            <div className="row">
+            <div className="col-2 p-3">
+                    <img
+                      src="https://hermanogato.org/wp-content/uploads/2020/10/gato-munchkin-2-400x400.jpg"
+                      className="img-fluid rounded-circle"
+                      alt="Contact"
+                    />
+            </div>
+            <div className="col-8">
+              <strong>{contact.full_name}</strong>
+              <p>{contact.email}</p>
+              <p>{contact.phone}</p>
+              <p>{contact.address}</p>
+            </div>
+            <div className="col-2">
+              <button onClick={() => deleteContact(contact.id)}>Delete</button></div>
+            
+            </div>
+            
+          </div>
         ))}
       </ul>
 
