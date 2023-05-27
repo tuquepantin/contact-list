@@ -1,26 +1,16 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLBASE: 'https://assets.breatheco.de/apis/fake/contact',
+			URLBASE: 'https://assets.breatheco.de/apis/fake/contact/',
 			contacts: [],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			id: ""
+			
 		},
 		actions: {
 			getContact: async () => {
 				const store = getStore()
 				try{
-					let response = await fetch(`${store.URLBASE}/agenda/victorpantin`)
+					let response = await fetch(`${store.URLBASE}agenda/victorpantin`)
 					let data = await response.json()
 		
 					if(response.status == 404){
@@ -43,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore()
 				const actions = getActions()
 				try {
-					let response = await fetch(`${store.URLBASE}/`, {
+					let response = await fetch(`${store.URLBASE}`, {
 						method: "POST",
 						headers:{
 							"Content-Type":"application/json"
@@ -65,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteContact: async (id) => {
 				const store = getStore()
 				try{
-					let response = await fetch(`${store.URLBASE}/${id}`, {
+					let response = await fetch(`${store.URLBASE}${id}`, {
 						method:"DELETE",
 					})
 					
@@ -80,6 +70,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 		
 				}catch(err){
+					console.log(err)
+				}
+		
+			},
+			updateContact: async (data, id) => {
+				const store = getStore()
+				
+				try {
+					let response = await fetch(`${store.URLBASE}${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-type": "application/json"
+						},
+						body: JSON.stringify(data)
+					})
+
+					if (response.ok) {
+						getActions().getContact()
+					} else {
+						console.log(id)
+					}
+
+				} catch (err) {
 					console.log(err)
 				}
 		

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { Link } from "react-router-dom";
 
 
 export const Card = () => {
@@ -31,10 +32,11 @@ export const Card = () => {
                   <p>{contact.address}</p>
                 </div>
                 <div className="col-2  mt-4">
-				            <i class="fa-solid fa-pencil fa-lg"></i>
-				            <i onClick={() => deleteContact(contact.id)} class="fa-solid fa-trash fa-lg puntero ms-4"></i>
-				  
-                </div>
+                  <Link to={`/update/${contact.id}`} >
+                      <i class="fa-solid fa-pencil fa-lg"></i>
+                    </Link>
+				          <i onClick={() => deleteContact(contact.id)} class="fa-solid fa-trash fa-lg puntero ms-4"></i>
+				        </div>
               </div>
             </div>
           ))}
