@@ -30,8 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 			},
 			createContact: async (data) => {
-				const store = getStore()
-				const actions = getActions()
+				
 				try {
 					let response = await fetch(`${store.URLBASE}`, {
 						method: "POST",

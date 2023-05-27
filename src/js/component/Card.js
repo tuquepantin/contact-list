@@ -16,7 +16,7 @@ export const Card = () => {
         
         <ul>
           {store.contacts.map((contact) => (
-            <div class="card" key={contact.id}>
+            <div className="card" key={contact.id}>
               <div className="row">
                 <div className="col-2 p-3">
                   <img
@@ -33,9 +33,9 @@ export const Card = () => {
                 </div>
                 <div className="col-2  mt-4">
                   <Link to={`/update/${contact.id}`} >
-                      <i class="fa-solid fa-pencil fa-lg"></i>
+                      <i className="fa-solid fa-pencil fa-lg"></i>
                     </Link>
-				          <i onClick={() => deleteContact(contact.id)} class="fa-solid fa-trash fa-lg puntero ms-4"></i>
+				          <i onClick={() => deleteContact(contact.id)} className="fa-solid fa-trash fa-lg puntero ms-4"></i>
 				        </div>
               </div>
             </div>

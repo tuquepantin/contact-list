@@ -6,9 +6,9 @@ import { Context } from "../store/appContext";
 export const Update = () => {
     const { actions, store } = useContext(Context)
 
-  const params = useParams()
+    const params = useParams()
 
-  const { Contacts } = store
+  
 
 
 
