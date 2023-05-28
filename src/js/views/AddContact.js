@@ -41,7 +41,7 @@ export const AddContact = () => {
       setSuccess(true)
         setTimeout(() => {
           setSuccess(false)
-        }, 3000);
+        }, 10000);
     }
   };
 

@@ -17,9 +17,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("error")
 						
 					}else{
+						
 						setStore({
 							contacts: data
 						})
+						
 					}
 		
 		
@@ -49,6 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.ok){
 							getActions().getContact()
 							return response.status
+							
 						}else{
 							console.log("error")
 						}
@@ -97,7 +100,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					if (response.ok) {
 						getActions().getContact()
-						return response.status
 					} else {
 						console.log("error")
 					}
