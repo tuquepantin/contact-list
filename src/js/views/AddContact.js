@@ -1,14 +1,11 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../store/appContext.js";
 
-import { Context } from "../store/appContext";
 
 export const AddContact = () => {
-  const { actions } = useContext(Context);
-
-  const handleChange = (event) => {
-    setNewContact({ ...newContact, [event.target.name]: event.target.value });
-  };
+  const { actions, store } = useContext(Context);
+  const params = useParams()
 
   const [newContact, setNewContact] = useState({
     full_name: "",
@@ -18,19 +15,43 @@ export const AddContact = () => {
     phone: "",
   });
 
+  function findContact() {
+		let exists = store.contacts.find((item) => item.id == params.contactId)
+		if (exists) {
+			setNewContact(
+				exists
+			)
+		}
+	}
+  
+  const handleChange = (event) => {
+    setNewContact({ ...newContact, [event.target.name]: event.target.value });
+  };
+
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     actions.createContact(newContact);
+
+    
+    
   };
+
+  useEffect(() => {
+		if (params.contactId) {
+			findContact()
+		}
+	}, [])
 
   return (
     <div className="container mt-4">
       <h1 className="text-center">Add a New Contact</h1>
       <form onSubmit={handleSubmit}>
-        <div class="mb-3">
-          <label class="form-label">Full Name</label>
+        <div className="mb-3">
+          <label className="form-label">Full Name</label>
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             name="full_name"
             placeholder="Name"
@@ -38,10 +59,10 @@ export const AddContact = () => {
             onChange={handleChange}
           />
         </div>
-        <div class="mb-3">
-          <label class="form-label">Email</label>
+        <div className="mb-3">
+          <label className="form-label">Email</label>
           <input
-            class="form-control"
+            className="form-control"
             type="email"
             name="email"
             placeholder="Email"
@@ -49,10 +70,10 @@ export const AddContact = () => {
             onChange={handleChange}
           />
         </div>
-        <div class="mb-3">
-          <label class="form-label">Phone</label>
+        <div className="mb-3">
+          <label className="form-label">Phone</label>
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             name="phone"
             placeholder="Phone"
@@ -60,10 +81,10 @@ export const AddContact = () => {
             onChange={handleChange}
           />
         </div>
-        <div class="mb-3">
-          <label class="form-label">Address</label>
+        <div className="mb-3">
+          <label className="form-label">Address</label>
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             name="address"
             placeholder="Address"
@@ -71,7 +92,7 @@ export const AddContact = () => {
             onChange={handleChange}
           />
         </div>
-        <button class="btn btn-primary col-12" type="submit">
+        <button className="btn btn-primary col-12" type="submit">
           Save
         </button>
       </form>

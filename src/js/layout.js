@@ -6,7 +6,7 @@ import { Contact } from "./views/Contact";
 import { AddContact } from "./views/AddContact";
 
 import injectContext from "./store/appContext";
-import { Update } from "./views/Update";
+
 
 
 
@@ -24,8 +24,8 @@ const Layout = () => {
 				<ScrollToTop>
 					<Routes>
 						<Route path="/" element={<Contact />} />
-						<Route path="/demo" element={<AddContact />} />
-						<Route path="/update/:contactId" element={<Update />} />
+						<Route path="/contact" element={<AddContact />} />
+						<Route path="/contact/:contactId" element={<AddContact />} />
 					    <Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 				</ScrollToTop>

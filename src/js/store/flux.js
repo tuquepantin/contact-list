@@ -30,26 +30,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 			},
 			createContact: async (data) => {
-				
-				try {
-					let response = await fetch(`${store.URLBASE}`, {
-						method: "POST",
-						headers:{
-							"Content-Type":"application/json"
-						},
-						body:JSON.stringify(data)
-					})
+				const store = getStore()
+				let exists = store.contacts.find((item) => item.email == data.email)
+				console.log(exists)
 
-					if (response.ok){
-						actions.getContact()
-					}else{
-						console.log("error")
+				if (exists) {
+					getActions().updateContact(data, exists.id)
+				} else {
+					try {
+						let response = await fetch(`${store.URLBASE}`, {
+							method: "POST",
+							headers: {
+								"Content-type": "application/json"
+							},
+							body: JSON.stringify(data)
+						})
+
+						if (response.ok) {
+							getActions().getContact()
+						} else {
+							console.log("error")
+						}
+
+					} catch (err) {
+						console.log(err)
 					}
-					
-
-				} catch (error) {
-					console.log(error)
 				}
+				
 			},
 			deleteContact: async (id) => {
 				const store = getStore()
@@ -88,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						getActions().getContact()
 					} else {
-						console.log(id)
+						console.log("error")
 					}
 
 				} catch (err) {

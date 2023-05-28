@@ -32,7 +32,7 @@ export const Card = () => {
                   <p>{contact.address}</p>
                 </div>
                 <div className="col-2  mt-4">
-                  <Link to={`/update/${contact.id}`} >
+                  <Link to={`/contact/${contact.id}`} >
                       <i className="fa-solid fa-pencil fa-lg"></i>
                     </Link>
 				          <i onClick={() => deleteContact(contact.id)} className="fa-solid fa-trash fa-lg puntero ms-4"></i>
