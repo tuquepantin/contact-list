@@ -15,6 +15,8 @@ export const AddContact = () => {
     phone: "",
   });
 
+  const [success, setSuccess] = useState(false)
+
   function findContact() {
 		let exists = store.contacts.find((item) => item.id == params.contactId)
 		if (exists) {
@@ -30,12 +32,17 @@ export const AddContact = () => {
 
   
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    actions.createContact(newContact);
 
+    let response = await actions.createContact(newContact);
     
-    
+    if (response == 200){
+      setSuccess(true)
+        setTimeout(() => {
+          setSuccess(false)
+        }, 3000);
+    }
   };
 
   useEffect(() => {
@@ -47,6 +54,7 @@ export const AddContact = () => {
   return (
     <div className="container mt-4">
       <h1 className="text-center">Add a New Contact</h1>
+      { success && <div class="alert alert-success" role="alert">Se ha creado el contacto</div> }
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Full Name</label>
@@ -92,6 +100,7 @@ export const AddContact = () => {
             onChange={handleChange}
           />
         </div>
+        
         <button className="btn btn-primary col-12" type="submit">
           Save
         </button>

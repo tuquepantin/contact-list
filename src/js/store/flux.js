@@ -46,11 +46,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(data)
 						})
 
-						if (response.ok) {
+						if (response.ok){
 							getActions().getContact()
-						} else {
+							return response.status
+						}else{
 							console.log("error")
 						}
+
+						
 
 					} catch (err) {
 						console.log(err)
@@ -94,6 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					if (response.ok) {
 						getActions().getContact()
+						return response.status
 					} else {
 						console.log("error")
 					}
